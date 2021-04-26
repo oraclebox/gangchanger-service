@@ -1,0 +1,16 @@
+# Spring properties
+server:
+  port: 28888
+spring:
+  application:
+    name: bass2
+  data:
+    mongodb:
+      uri: ${BASS2_DB_URL:mongodb://app:Gang!changer_Service0@wonger-mp:27018/gangchanger}
+---
+#Properties override when -Dspring.profiles.active=UNITTEST
+spring:
+  profiles: UNITTEST
+  data:
+    mongodb:
+      uri: mongodb://localhost:27018/gangchanger
