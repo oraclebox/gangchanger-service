@@ -32,9 +32,16 @@ class SurveyController {
 
     @ApiKeyRequired
     @GetMapping('/software')
-    Reply searchSoftware(@RequestParam(required = false, name = "name") String name) {
+    Reply searchSoftware(@RequestParam(required = false, name = "name") String name,
+                         @RequestParam(required = false, name = "limit", defaultValue = "50") Integer limit) {
         Search search = new Search();
         search.params.put("name", name);
-        return new Reply(data: surveyService.searchSoftware(search));
+        return new Reply(data: surveyService.searchSoftware(search, limit));
+    }
+
+    @ApiKeyRequired
+    @GetMapping('/popular/softwares')
+    Reply getMostPopularSoftware(@RequestParam(required = false, name = "limit", defaultValue = "100") Integer limit) {
+        return new Reply(data: surveyService.findMostPopularSoftware(limit));
     }
 }

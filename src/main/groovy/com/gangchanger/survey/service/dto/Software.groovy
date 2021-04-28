@@ -9,7 +9,9 @@ class Software {
     String id;
     String name;
     String category;
+    String imgSrc;
     String description;
+    Double rate;
     Date updateTs = new Date();
     boolean active = true;
 }
