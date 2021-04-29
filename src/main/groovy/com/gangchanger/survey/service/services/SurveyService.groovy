@@ -2,6 +2,7 @@ package com.gangchanger.survey.service.services
 
 import com.gangchanger.survey.service.dto.Software
 import com.gangchanger.survey.service.model.Search
+import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Service
 
+@Slf4j
 @Service
 class SurveyService {
 
@@ -41,5 +43,20 @@ class SurveyService {
         query.limit(limit);
         query.with(Sort.by(Sort.Direction.DESC,"rate", "name"));
         return mongoTemplate.find(query, Software.class);
+    }
+
+    void upsert(Software software, String platformName){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("platform").is(platformName));
+        query.addCriteria(Criteria.where("name").is(software.name));
+        Software rec = mongoTemplate.findOne(query, Software.class);
+        if(rec != null){
+            software.id = rec.id;
+            mongoTemplate.save(software);
+        }
+        else{
+            mongoTemplate.save(software);
+        }
+        log.info("Saved software ${platformName} - ${software.name}");
     }
 }

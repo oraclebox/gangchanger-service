@@ -7,6 +7,9 @@ spring:
   data:
     mongodb:
       uri: ${BASS2_DB_URL:mongodb://app:Gang!changer_Service0@wonger-mp:27018/gangchanger}
+app:
+  staticData:
+    enableChromePluginLoading: false
 ---
 #Properties override when -Dspring.profiles.active=UNITTEST
 spring:
@@ -14,3 +17,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27018/gangchanger
+app:
+  staticData:
+    enableChromePluginLoading: false
