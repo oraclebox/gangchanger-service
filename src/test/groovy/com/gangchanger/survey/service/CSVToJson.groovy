@@ -2,6 +2,7 @@ package com.gangchanger.survey.service
 
 import com.gangchanger.survey.service.dto.Software
 import groovy.util.logging.Slf4j
+import jdk.nashorn.internal.ir.annotations.Ignore
 import org.apache.commons.lang3.StringUtils
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class CSVToJson {
 
+	@Ignore
 	@Test
 	void convert() {
 		String csv = new File('testing/category.csv').text;
