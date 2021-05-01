@@ -10,7 +10,9 @@ spring:
       uri: ${DB_URL:mongodb://app:Gang!changer_Service0@localhost:27017/gangchanger}
 app:
   staticData:
-    enableChromePluginLoading: true
+    enableChromePluginLoading: false
+    enableSlackPluginLoading: true
+    enableShopifyPluginLoading: true
 ---
 #Properties override when -Dspring.profiles.active=UNITTEST
 spring:

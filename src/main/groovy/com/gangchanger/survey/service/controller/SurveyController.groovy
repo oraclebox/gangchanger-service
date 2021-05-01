@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.RestController
 
 @Slf4j
 @RestController
-@RequestMapping('/gangchanager/survey')
+@RequestMapping('/gangchanager')
 class SurveyController {
 
     @Autowired
     SurveyService surveyService;
 
     @ApiKeyRequired
-    @PostMapping()
+    @PostMapping('/software')
     Reply postSoftware(@RequestBody List<Software> softwares) {
         Assert.notNull(softwares, "Missing softwares.")
         return new Reply(data: surveyService.upsert(softwares));
     }
 
     @ApiKeyRequired
-    @GetMapping('/software')
+    @GetMapping('/softwares')
     Reply searchSoftware(@RequestParam(required = false, name = "name") String name,
                          @RequestParam(required = false, name = "limit", defaultValue = "50") Integer limit) {
         Search search = new Search();
@@ -47,9 +47,10 @@ class SurveyController {
     }
 
     @ApiKeyRequired
-    @PostMapping("/")
+    @PostMapping('/survey')
     Reply submitSurvey(@RequestBody Survey survey) {
-        Assert.notNull(survey, "Missing survey.")
+        Assert.notNull(survey, "Missing survey.");
+        Assert.notNull(survey.email, "Email must need to provide.")
         return new Reply(data: surveyService.upsert(survey));
     }
 }

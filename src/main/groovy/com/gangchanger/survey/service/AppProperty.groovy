@@ -21,5 +21,7 @@ class AppProperty {
 
     static class StaticData{
         boolean enableChromePluginLoading=true;
+        boolean enableSlackPluginLoading=true;
+        boolean enableShopifyPluginLoading=true;
     }
 }

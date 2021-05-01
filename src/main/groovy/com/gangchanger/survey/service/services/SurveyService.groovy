@@ -29,7 +29,18 @@ class SurveyService {
     }
 
     Survey upsert(Survey survey){
-        return survey;
+        survey.updateTs = new Date();
+        Survey rs = findByEmail(survey.email);
+        if(rs != null){
+            survey.id = rs.id
+        }
+        return mongoTemplate.save(survey);
+    }
+
+    Survey findByEmail(String email) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where('email').is(email));
+        return mongoTemplate.findOne(query, Survey.class);
     }
 
     List<Software> searchSoftware(Search search, Integer limit) {
