@@ -42,7 +42,7 @@ class StartupApplicationListener implements ApplicationListener<ContextRefreshed
                 List<Map<?, ?>> list = mappingIterator.readAll();
                 list.each {
                     Software software = objectMapper.readValue(objectMapper.writeValueAsString(it), Software.class);
-                    //software.category = 'Tool';
+                    software.category = 'Tool';
                     software.platform = 'Shopify Plugin';
                     software.rate = 3.0;
                     softwares.put(software.name, software);
