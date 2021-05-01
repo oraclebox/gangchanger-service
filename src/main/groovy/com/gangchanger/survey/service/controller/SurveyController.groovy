@@ -34,9 +34,11 @@ class SurveyController {
     @ApiKeyRequired
     @GetMapping('/softwares')
     Reply searchSoftware(@RequestParam(required = false, name = "name") String name,
+                         @RequestParam(required = false, name = "platform") String platform,
                          @RequestParam(required = false, name = "limit", defaultValue = "50") Integer limit) {
         Search search = new Search();
         search.params.put("name", name);
+        search.params.put("platform", platform);
         return new Reply(data: surveyService.searchSoftware(search, limit));
     }
 

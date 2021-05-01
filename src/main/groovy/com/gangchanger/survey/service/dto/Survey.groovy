@@ -10,6 +10,12 @@ class Survey {
     String id;
     @Indexed
     String email;
-    List<Software> selectedSoftware = [];
+    List<Choice> choices = [];
     Date updateTs = new Date();
+
+    static class Choice{
+        Software software;
+        Software alternative;
+        String reason;
+    }
 }
