@@ -1,4 +1,5 @@
-bass2:
+gangchanger:
+  build: .
   container_name: gangchanger-service
   mem_limit: 2147483648
   command: java -Xms256m -Xmx1536m -jar app.jar
