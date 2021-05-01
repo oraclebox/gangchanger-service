@@ -12,7 +12,7 @@ app:
   staticData:
     enableChromePluginLoading: false
     enableSlackPluginLoading: false
-    enableShopifyPluginLoading: true
+    enableShopifyPluginLoading: false
 ---
 #Properties override when -Dspring.profiles.active=UNITTEST
 spring:
