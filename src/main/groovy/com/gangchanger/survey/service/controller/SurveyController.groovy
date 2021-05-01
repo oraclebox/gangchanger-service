@@ -1,6 +1,7 @@
 package com.gangchanger.survey.service.controller
 
 import com.gangchanger.survey.service.dto.Software
+import com.gangchanger.survey.service.dto.Survey
 import com.gangchanger.survey.service.interceptor.ApiKeyRequired
 import com.gangchanger.survey.service.model.Reply
 import com.gangchanger.survey.service.model.Search
@@ -43,5 +44,12 @@ class SurveyController {
     @GetMapping('/popular/softwares')
     Reply getMostPopularSoftware(@RequestParam(required = false, name = "limit", defaultValue = "100") Integer limit) {
         return new Reply(data: surveyService.findMostPopularSoftware(limit));
+    }
+
+    @ApiKeyRequired
+    @PostMapping("/")
+    Reply submitSurvey(@RequestBody Survey survey) {
+        Assert.notNull(survey, "Missing survey.")
+        return new Reply(data: surveyService.upsert(survey));
     }
 }

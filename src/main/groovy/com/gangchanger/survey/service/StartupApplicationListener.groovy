@@ -33,7 +33,7 @@ class StartupApplicationListener implements ApplicationListener<ContextRefreshed
             Map<String, Software> softwares = [:];
             List<ChromePlugin> chromePluginList = objectMapper.readValue(new File('static/chrome/extensions.json').text, ChromePlugin[].class);
             chromePluginList.each {
-                if (!softwares.containsKey(it.name)) {
+                if (!softwares.containsKey(it.name) && it.category != 'Fun') {
                     Software software = new Software(rate: it.rating,
                             platform: "Chrome Plugin",
                             priceTag: it.price,
@@ -44,8 +44,10 @@ class StartupApplicationListener implements ApplicationListener<ContextRefreshed
                 }
             }
             log.info("Total ${softwares.size()} softwares.")
+            int count = 0;
             softwares.values().each {
-                surveyService.upsert(it, 'Chrome Plugin');
+                surveyService.upsert(it, it.platform);
+                log.info("Saved #${count++} software ${it.name} - ${it.platform}");
             }
             log.info("Finished load chrome plugin from static data.");
         }

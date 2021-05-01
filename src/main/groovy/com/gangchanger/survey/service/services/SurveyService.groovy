@@ -1,6 +1,7 @@
 package com.gangchanger.survey.service.services
 
 import com.gangchanger.survey.service.dto.Software
+import com.gangchanger.survey.service.dto.Survey
 import com.gangchanger.survey.service.model.Search
 import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.StringUtils
@@ -27,6 +28,10 @@ class SurveyService {
         return rs;
     }
 
+    Survey upsert(Survey survey){
+        return survey;
+    }
+
     List<Software> searchSoftware(Search search, Integer limit) {
         Query query = new Query();
         query.limit(limit);
@@ -50,13 +55,8 @@ class SurveyService {
         query.addCriteria(Criteria.where("platform").is(platformName));
         query.addCriteria(Criteria.where("name").is(software.name));
         Software rec = mongoTemplate.findOne(query, Software.class);
-        if(rec != null){
-            software.id = rec.id;
+        if(rec == null){
             mongoTemplate.save(software);
         }
-        else{
-            mongoTemplate.save(software);
-        }
-        log.info("Saved software ${platformName} - ${software.name}");
     }
 }
