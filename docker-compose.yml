@@ -1,0 +1,12 @@
+bass2:
+  container_name: gangchanger-service
+  mem_limit: 2147483648
+  command: java -Xms256m -Xmx1536m -jar app.jar
+  ports:
+    - 127.0.0.1:28888:28888/tcp
+  restart: on-failure:3
+  log_driver: json-file
+  log_opt:
+    max-file: '5'
+    max-size: 20m
+  net: 'host'
