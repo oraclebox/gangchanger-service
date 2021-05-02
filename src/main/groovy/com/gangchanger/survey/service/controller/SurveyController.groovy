@@ -25,6 +25,12 @@ class SurveyController {
     SurveyService surveyService;
 
     @ApiKeyRequired
+    @GetMapping('/greeting')
+    Reply greeting() {
+        return new Reply(systemMessage: "Hello World from Gangchanger.");
+    }
+
+    @ApiKeyRequired
     @PostMapping('/software')
     Reply postSoftware(@RequestBody List<Software> softwares) {
         Assert.notNull(softwares, "Missing softwares.")
