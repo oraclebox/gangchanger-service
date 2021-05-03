@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @Slf4j
 @RestController
-@RequestMapping('/bass/2/sysadmin')
+@RequestMapping('/gangchanger/sysadmin')
 class SysadminController{
 
     @Autowired
