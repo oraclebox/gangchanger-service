@@ -13,6 +13,7 @@ app:
     enableChromePluginLoading: false
     enableSlackPluginLoading: false
     enableShopifyPluginLoading: false
+    enableCapterraPluginLoading: true
 ---
 #Properties override when -Dspring.profiles.active=UNITTEST
 spring:

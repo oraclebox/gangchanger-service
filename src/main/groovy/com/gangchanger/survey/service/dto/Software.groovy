@@ -19,6 +19,7 @@ class Software {
     Double price;
     String priceTag;
     Double rate;
+    String rateTag;
     Date updateTs = new Date();
     boolean active = true;
 }

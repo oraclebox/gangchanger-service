@@ -23,5 +23,6 @@ class AppProperty {
         boolean enableChromePluginLoading=true;
         boolean enableSlackPluginLoading=true;
         boolean enableShopifyPluginLoading=true;
+        boolean enableCapterraPluginLoading=true;
     }
 }
