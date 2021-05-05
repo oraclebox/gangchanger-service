@@ -6,6 +6,7 @@ import com.gangchanger.survey.service.model.Search
 import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.annotation.Order
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria
@@ -46,6 +47,7 @@ class SurveyService {
     List<Software> searchSoftware(Search search, Integer limit) {
         Query query = new Query();
         query.limit(limit);
+        query.with(Sort.by(new Sort.Order(Sort.Direction.ASC, "name")));
         search.params.keySet().each {
             if (StringUtils.isNotBlank(search.params.get(it))) {
                 query.addCriteria(Criteria.where(it).regex(search.params.get(it)));
