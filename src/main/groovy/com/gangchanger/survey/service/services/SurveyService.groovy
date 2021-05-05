@@ -50,11 +50,12 @@ class SurveyService {
         query.with(Sort.by(new Sort.Order(Sort.Direction.ASC, "name")));
         search.params.keySet().each {
             if (StringUtils.isNotBlank(search.params.get(it))) {
-                query.addCriteria(Criteria.where(it).regex(search.params.get(it)));
+                query.addCriteria(Criteria.where(it).regex("^${search.params.get(it)}.*", "i"));
             }
         }
         return mongoTemplate.find(query, Software.class);
     }
+
 
     List<Software> findMostPopularSoftware(Integer limit) {
         Query query = new Query();
