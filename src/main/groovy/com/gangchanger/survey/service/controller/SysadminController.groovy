@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @Slf4j
-@RestController
-@RequestMapping('/gangchanger/sysadmin')
+//@RestController
+//@RequestMapping('/gangchanger/sysadmin')
 class SysadminController{
 
     @Autowired
