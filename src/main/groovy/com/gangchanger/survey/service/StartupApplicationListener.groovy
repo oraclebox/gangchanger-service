@@ -99,7 +99,7 @@ class StartupApplicationListener implements ApplicationListener<ContextRefreshed
                 List<Map<?, ?>> list = mappingIterator.readAll();
                 list.each {
                     Software software = objectMapper.readValue(objectMapper.writeValueAsString(it), Software.class);
-                    software.platform = 'Any';
+                    software.platform = 'Software';
                     if(StringUtils.isNotBlank(software.rateTag)){
                         software.rateTag = StringUtils.substringBefore(software.rateTag, "(")?.trim();
                         software.rate = Double.parseDouble(software.rateTag);
