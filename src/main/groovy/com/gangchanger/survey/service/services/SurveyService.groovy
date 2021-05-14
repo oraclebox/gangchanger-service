@@ -19,6 +19,8 @@ class SurveyService {
 
     @Autowired
     MongoTemplate mongoTemplate;
+    @Autowired
+    EmailService emailService;
 
     List<Software> upsert(List<Software> softwares){
         List<Software> rs = [];
@@ -29,14 +31,20 @@ class SurveyService {
         return rs;
     }
 
-    Survey upsert(Survey survey){
+    Survey updateSurvey(Survey survey){
         survey.updateTs = new Date();
         Survey rs = findByEmail(survey.email);
         if(rs != null){
-            survey.id = rs.id
+            survey.id = rs.id;
+            survey.sentWelcomeMail = rs.sentWelcomeMail;
+        }
+        if(!survey.sentWelcomeMail){
+            emailService.sendEmail(survey.email, 23474743);
+            survey.sentWelcomeMail = true;
         }
         return mongoTemplate.save(survey);
     }
+
 
     Survey findByEmail(String email) {
         Query query = new Query();

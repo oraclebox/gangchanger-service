@@ -59,6 +59,6 @@ class SurveyController {
     Reply submitSurvey(@RequestBody Survey survey) {
         Assert.notNull(survey, "Missing survey.");
         Assert.notNull(survey.email, "Email must need to provide.")
-        return new Reply(data: surveyService.upsert(survey));
+        return new Reply(data: surveyService.updateSurvey(survey));
     }
 }

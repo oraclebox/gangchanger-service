@@ -12,6 +12,7 @@ class Survey {
     String email;
     List<Choice> choices = [];
     Date updateTs = new Date();
+    boolean sentWelcomeMail;
 
     static class Choice{
         Software software;
