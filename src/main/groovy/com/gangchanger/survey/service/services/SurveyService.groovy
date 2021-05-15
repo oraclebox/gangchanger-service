@@ -1,5 +1,6 @@
 package com.gangchanger.survey.service.services
 
+import com.gangchanger.survey.service.AppProperty
 import com.gangchanger.survey.service.dto.Software
 import com.gangchanger.survey.service.dto.Survey
 import com.gangchanger.survey.service.model.Search
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service
 @Service
 class SurveyService {
 
+    @Autowired
+    AppProperty appProperty;
     @Autowired
     MongoTemplate mongoTemplate;
     @Autowired
@@ -39,7 +42,7 @@ class SurveyService {
             survey.sentWelcomeMail = rs.sentWelcomeMail;
         }
         if(!survey.sentWelcomeMail){
-            emailService.sendEmail(survey.email, 23474743);
+            emailService.sendEmail(appProperty.mail.from, survey.email, 23474743);
             survey.sentWelcomeMail = true;
         }
         return mongoTemplate.save(survey);
@@ -68,7 +71,8 @@ class SurveyService {
     List<Software> findMostPopularSoftware(Integer limit) {
         Query query = new Query();
         query.limit(limit);
-        query.with(Sort.by(Sort.Direction.DESC,"rate", "name"));
+        query.addCriteria(Criteria.where("popular").is(true));
+        query.with(Sort.by(Sort.Direction.ASC, "name"));
         return mongoTemplate.find(query, Software.class);
     }
 

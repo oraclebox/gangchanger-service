@@ -13,6 +13,6 @@ class EmailServiceTest extends Assertions {
 
     @Test
     void email() {
-        emailService.sendEmail("oraclebox@gmail.com", 23474743);
+        emailService.sendEmail("info@gangchanger.com","raymondsze27@gmail.com", 23474743);
     }
 }

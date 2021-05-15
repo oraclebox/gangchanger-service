@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = "app")
 class AppProperty {
 
+    Mail mail = new Mail();
     StaticData staticData = new StaticData();
 
     static class Proxy {
@@ -17,6 +18,10 @@ class AppProperty {
         String host;
         int port;
         List<String> nonProxyHosts = [];
+    }
+
+    static class Mail{
+        String from = 'info@gangchanger.com'
     }
 
     static class StaticData{

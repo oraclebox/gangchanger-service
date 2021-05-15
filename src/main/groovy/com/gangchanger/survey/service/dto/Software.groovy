@@ -20,6 +20,7 @@ class Software {
     String priceTag;
     Double rate;
     String rateTag;
+    boolean popular;
     Date updateTs = new Date();
     boolean active = true;
 }

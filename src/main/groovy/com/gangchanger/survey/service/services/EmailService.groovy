@@ -13,17 +13,21 @@ import org.springframework.stereotype.Service
 @Service
 class EmailService {
 
-    void sendEmail(String email, int templateId){
-        ApiClient client = Postmark.getApiClient("0f1bba5d-bc4c-4a4e-8c9b-3e731aa56cba");
-        TemplatedMessage templatedMessage = new TemplatedMessage("info@gangchanger.com", email, templateId);
-        templatedMessage.setTemplateModel(["name": email]);
-        //client.deliverMessage(templatedMessage)
-        //Message message = new Message("info@gangchanger.com", "info@gangchanger.com", "Hello from Postmark!", "Hello message body");
-        //message.setMessageStream("outbound");
+    void sendEmail(String from, String email, int templateId){
+        try {
+            ApiClient client = Postmark.getApiClient("0f1bba5d-bc4c-4a4e-8c9b-3e731aa56cba");
+            TemplatedMessage templatedMessage = new TemplatedMessage(from, email, templateId);
+            templatedMessage.setTemplateModel(["name": email]);
+            //client.deliverMessage(templatedMessage)
+            //Message message = new Message("info@gangchanger.com", "info@gangchanger.com", "Hello from Postmark!", "Hello message body");
+            //message.setMessageStream("outbound");
 
-        //MessageResponse response = client.deliverMessage(message);
-        MessageResponse response = client.deliverMessageWithTemplate(templatedMessage);
-        log.info(response.getMessage());
+            //MessageResponse response = client.deliverMessage(message);
+            MessageResponse response = client.deliverMessageWithTemplate(templatedMessage);
+            log.info(response.getMessage());
+        }catch(Exception e){
+            log.error("Failed to send email message", e);
+        }
     }
 
 }
