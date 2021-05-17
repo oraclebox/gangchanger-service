@@ -14,12 +14,12 @@ repositories {
 	maven { url 'https://repo.spring.io/snapshot' }
 }
 
-configurations {
-	all {
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-		exclude group: 'ch.qos.logback', module: 'logback-classic'
-	}
-}
+//configurations {
+//	all {
+//		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//		exclude group: 'ch.qos.logback', module: 'logback-classic'
+//	}
+//}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -27,7 +27,11 @@ dependencies {
 	implementation 'org.codehaus.groovy:groovy'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 	// https://mvnrepository.com/artifact/com.wildbit.java/postmark
-	implementation group: 'com.wildbit.java', name: 'postmark', version: '1.7'
+	implementation ('com.wildbit.java:postmark:1.7'){
+		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+		exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+		exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+	}
 
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-csv
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.12.3'
