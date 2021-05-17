@@ -7,5 +7,5 @@ COPY application.yml /application/application.yml
 COPY static /application/static
 WORKDIR /application
 
-CMD ["java","-jar","app.jar"]
+CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
 EXPOSE 28888
