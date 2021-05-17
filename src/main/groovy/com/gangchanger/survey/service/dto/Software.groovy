@@ -1,5 +1,6 @@
 package com.gangchanger.survey.service.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.CompoundIndex
 import org.springframework.data.mongodb.core.index.Index
@@ -13,8 +14,10 @@ class Software {
     String platform;
     String name;
     String category;
+    @JsonIgnore
     String imgSrc;
     String description;
+    @JsonIgnore
     String url;
     Double price;
     String priceTag;
