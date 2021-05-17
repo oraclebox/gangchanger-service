@@ -11,7 +11,7 @@ spring:
 app:
   staticData:
     enableChromePluginLoading: false
-    enableSlackPluginLoading: true
+    enableSlackPluginLoading: false
     enableShopifyPluginLoading: false
     enableCapterraPluginLoading: false
 ---
