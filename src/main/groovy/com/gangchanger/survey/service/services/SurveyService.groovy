@@ -43,6 +43,7 @@ class SurveyService {
     Survey updateSurvey(Survey survey){
         survey.updateTs = new Date();
         Survey rs = findByEmail(survey.email);
+        survey.hash = survey.email.digest('SHA-256');
         if(rs != null){
             survey.id = rs.id;
             survey.sentWelcomeMail = rs.sentWelcomeMail;
@@ -51,7 +52,6 @@ class SurveyService {
             emailService.sendEmail(appProperty.mail.from, survey.email, survey.hash, 23474743);
             survey.sentWelcomeMail = true;
         }
-        survey.hash = survey.email.digest('SHA-256');
         return mongoTemplate.save(survey);
     }
 
