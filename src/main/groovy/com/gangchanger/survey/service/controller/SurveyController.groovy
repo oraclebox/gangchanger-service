@@ -61,4 +61,10 @@ class SurveyController {
         Assert.notNull(survey.email, "Email must need to provide.")
         return new Reply(data: surveyService.updateSurvey(survey));
     }
+
+    @GetMapping('/survey')
+    Reply getSurvey(@RequestBody String hash) {
+        Assert.notNull(hash, "Required id is missing.");
+        return new Reply(data: surveyService.findByHash(hash));
+    }
 }

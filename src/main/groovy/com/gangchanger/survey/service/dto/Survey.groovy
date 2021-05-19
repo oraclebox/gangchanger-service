@@ -10,6 +10,9 @@ class Survey {
     String id;
     @Indexed
     String email;
+    @Indexed
+    String hash;
+
     List<Choice> choices = [];
     Date updateTs = new Date();
     boolean sentWelcomeMail;

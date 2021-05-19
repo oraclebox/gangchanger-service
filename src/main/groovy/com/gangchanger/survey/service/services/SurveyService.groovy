@@ -34,12 +34,19 @@ class SurveyService {
         return rs;
     }
 
+    Survey findByHash(String hash){
+        Query query = new Query();
+        query.addCriteria(Criteria.where('hash').is(hash));
+        return mongoTemplate.findOne(query, Survey.class);
+    }
+
     Survey updateSurvey(Survey survey){
         survey.updateTs = new Date();
         Survey rs = findByEmail(survey.email);
         if(rs != null){
             survey.id = rs.id;
             survey.sentWelcomeMail = rs.sentWelcomeMail;
+            survey.hash = survey.email.digest('SHA-256');
         }
         if(!survey.sentWelcomeMail){
             emailService.sendEmail(appProperty.mail.from, survey.email, 23474743);
