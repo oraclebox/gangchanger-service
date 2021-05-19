@@ -10,6 +10,7 @@ import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.util.Assert
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -62,8 +63,8 @@ class SurveyController {
         return new Reply(data: surveyService.updateSurvey(survey));
     }
 
-    @GetMapping('/survey')
-    Reply getSurvey(@RequestBody String hash) {
+    @GetMapping('/survey/{hash}')
+    Reply getSurvey(@PathVariable String hash) {
         Assert.notNull(hash, "Required id is missing.");
         return new Reply(data: surveyService.findByHash(hash));
     }
