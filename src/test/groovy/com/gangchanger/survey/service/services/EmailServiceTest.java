@@ -16,6 +16,6 @@ class EmailServiceTest extends Assertions {
     @Ignore
     @Test
     void email() {
-        emailService.sendEmail("info@gangchanger.com","raymondsze27@gmail.com", 23474743);
+        emailService.sendEmail("info@gangchanger.com","raymondsze27@gmail.com", "hash02031231", 23474743);
     }
 }

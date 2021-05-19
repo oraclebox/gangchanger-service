@@ -48,7 +48,7 @@ class SurveyService {
             survey.sentWelcomeMail = rs.sentWelcomeMail;
         }
         if(!survey.sentWelcomeMail){
-            emailService.sendEmail(appProperty.mail.from, survey.email, 23474743);
+            emailService.sendEmail(appProperty.mail.from, survey.email, survey.hash, 23474743);
             survey.sentWelcomeMail = true;
         }
         survey.hash = survey.email.digest('SHA-256');

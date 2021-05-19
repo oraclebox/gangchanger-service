@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service
 @Service
 class EmailService {
 
-    void sendEmail(String from, String email, int templateId){
+    void sendEmail(String from, String email, String hash, int templateId){
         try {
             ApiClient client = Postmark.getApiClient("0f1bba5d-bc4c-4a4e-8c9b-3e731aa56cba");
             TemplatedMessage templatedMessage = new TemplatedMessage(from, email, templateId);
-            templatedMessage.setTemplateModel(["name": email]);
+            templatedMessage.setTemplateModel(["name": email, "hash":hash]);
             //client.deliverMessage(templatedMessage)
             //Message message = new Message("info@gangchanger.com", "info@gangchanger.com", "Hello from Postmark!", "Hello message body");
             //message.setMessageStream("outbound");
